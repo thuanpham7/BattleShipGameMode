@@ -11,8 +11,6 @@ public class Ship {
 	private Vector<Boolean> myHits = new Vector<Boolean>(10);
 	private boolean[][] mypegPoint = new boolean[10][10];
 	private Shiptype[][] myshipPlace = new Shiptype[10][10];
-	private String myship;
-	private boolean mySunk;
 	private static String myShip;
 	private Shiptype myShiptype;
 	private int sequence = 0;
@@ -21,9 +19,6 @@ public class Ship {
 		myShiptype = type;
 		myLength = length;
 	}
-	
-	
-
 
 	public boolean placePeg (Point location) {
 		boolean declare = true;
@@ -38,14 +33,13 @@ public class Ship {
 			if(myshipPlace[location.x][location.y] != null) {
 				sequence += 1;
 				myHits.set(location.y - myFrontLocation.y,true);  
-				
+
 			}
 		}else {
 			declare = false;
 		}
 		return declare;
 	}
-	
 
 	public boolean isSunk() {
 		if ((myShiptype == Shiptype.BATTLESHIP) && (sequence == 4)) {
@@ -76,8 +70,6 @@ public class Ship {
 			return true;
 		}
 		// Testing bad location based on Ship length
-
-
 	}
 
 	public boolean setBackLocation (Point location) {
@@ -93,29 +85,29 @@ public class Ship {
 		else {
 			myBackLocation = location;
 			if ( (((myFrontLocation.x - (myLength-1) <= location.x) || (myFrontLocation.x + (myLength-1) <= location.x)) && (myFrontLocation.y == location.y))
-				||   (((myFrontLocation.y - (myLength-1) <= location.y) || (myFrontLocation.y + (myLength-1) <= location.y)) && (myFrontLocation.x == location.x))) {
-					for (int i = 0; i <= myLength-1; i++) {
-						if ((myFrontLocation.x - location.x != 0) && (myFrontLocation.y - location.y == 0)) {
-							if (myFrontLocation.x - location.x < 0) {
-								myshipPlace[myFrontLocation.x+i][location.y] = myShiptype;
-							}else if (myFrontLocation.x - location.x > 0) {
-								myshipPlace[myFrontLocation.x - i][location.y] = myShiptype;
-							}
-						} else if((myFrontLocation.y - location.y != 0) && (myFrontLocation.x - location.x == 0)) {
-							if (myFrontLocation.y - location.y < 0) {
-								myshipPlace[myFrontLocation.x][location.y-i] = myShiptype;
-							}else if (myFrontLocation.x - location.x > 0) {
-								myshipPlace[myFrontLocation.x][location.y+i] = myShiptype;
-							}
+					||   (((myFrontLocation.y - (myLength-1) <= location.y) || (myFrontLocation.y + (myLength-1) <= location.y)) && (myFrontLocation.x == location.x))) {
+				for (int i = 0; i <= myLength-1; i++) {
+					if ((myFrontLocation.x - location.x != 0) && (myFrontLocation.y - location.y == 0)) {
+						if (myFrontLocation.x - location.x < 0) {
+							myshipPlace[myFrontLocation.x+i][location.y] = myShiptype;
+						}else if (myFrontLocation.x - location.x > 0) {
+							myshipPlace[myFrontLocation.x - i][location.y] = myShiptype;
+						}
+					} else if((myFrontLocation.y - location.y != 0) && (myFrontLocation.x - location.x == 0)) {
+						if (myFrontLocation.y - location.y < 0) {
+							myshipPlace[myFrontLocation.x][location.y-i] = myShiptype;
+						}else if (myFrontLocation.x - location.x > 0) {
+							myshipPlace[myFrontLocation.x][location.y+i] = myShiptype;
 						}
 					}
-			
-			return true;
-		} else {
-			return false;
+				}
+
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
-}
 
 
 	public Point getFrontLocation() {
@@ -157,7 +149,7 @@ public class Ship {
 
 	public Vector<Boolean> getHits(){
 		if ( (myHits.isEmpty() == true) || (myHits.firstElement() == false)) {
-				myHits.add(false);
+			myHits.add(false);
 		} else {
 			return myHits;
 		}

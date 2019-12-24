@@ -12,9 +12,7 @@ public class ShipBoard {
 	private boolean[][] pegPoint = new boolean[10][10];
 	private Shiptype[][] myShipPlace = new Shiptype[10][10];
 	private int sequence = 0;
-	private Shiptype myType;
 	private int sunk = 0;
-	private DecisionMaker Level;
 	
 	
 	public ShipBoard() {
@@ -81,7 +79,6 @@ public class ShipBoard {
 			}
 		}
 	}
-
 
 
 	public boolean placeShip(Shiptype type, Point front, Point back) {
